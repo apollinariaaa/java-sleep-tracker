@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.function.Function;
 
 public class AvgDurationAnalysis
-        implements Function<List<SleepingSession>, SleepAnalysisResult<Double>> {
+        implements SleepAnalysis {
 
     @Override
     public SleepAnalysisResult<Double> apply(List<SleepingSession> sessions) {

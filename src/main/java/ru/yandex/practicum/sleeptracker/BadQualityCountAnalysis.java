@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.function.Function;
 
 public class BadQualityCountAnalysis
-        implements Function<List<SleepingSession>, SleepAnalysisResult<Long>> {
+        implements SleepAnalysis {
 
     @Override
     public SleepAnalysisResult<Long> apply(List<SleepingSession> sessions) {

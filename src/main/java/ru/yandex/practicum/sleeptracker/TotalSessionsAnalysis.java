@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.function.Function;
 
 public class TotalSessionsAnalysis
-        implements Function<List<SleepingSession>, SleepAnalysisResult<Integer>> {
+        implements SleepAnalysis {
 
     @Override
     public SleepAnalysisResult<Integer> apply(List<SleepingSession> sessions) {

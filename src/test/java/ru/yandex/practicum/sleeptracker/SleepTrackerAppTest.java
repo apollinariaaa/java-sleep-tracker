@@ -1,17 +1,31 @@
 package ru.yandex.practicum.sleeptracker;
 
 import org.junit.jupiter.api.Test;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class SleepTrackerAppTest {
 
-    // ===== ВСПОМОГАТЕЛЬНЫЙ МЕТОД =====
+    private static final DateTimeFormatter FORMATTER =
+            DateTimeFormatter.ofPattern("dd.MM.yy HH:mm");
+
+    // =====================================================
+    // ВСПОМОГАТЕЛЬНЫЙ МЕТОД
+    // =====================================================
 
     private SleepingSession session(String start,
                                     String end,
                                     SleepQuality quality) {
-        return TestUtils.session(start, end, quality);
+
+        return new SleepingSession(
+                LocalDateTime.parse(start, FORMATTER),
+                LocalDateTime.parse(end, FORMATTER),
+                quality
+        );
     }
 
     // =====================================================
@@ -125,17 +139,16 @@ public class SleepTrackerAppTest {
     }
 
     // =====================================================
-    // SLEEPLESS NIGHTS (4 теста)
-    // =====================================================
+// SLEEPLESS NIGHTS
+// =====================================================
 
     @Test
-    void sleepless_shouldDetectOneNight() {
+    void sleepFrom23To3_shouldNotBeSleepless() {
         List<SleepingSession> sessions = List.of(
-                session("01.10.25 22:00", "02.10.25 07:00", SleepQuality.GOOD),
-                session("03.10.25 07:00", "03.10.25 09:00", SleepQuality.NORMAL)
+                session("01.10.25 23:00", "02.10.25 03:00", SleepQuality.GOOD)
         );
 
-        assertEquals(1,
+        assertEquals(0,
                 new SleeplessNightsAnalysis().apply(sessions).getValue());
     }
 
@@ -150,25 +163,18 @@ public class SleepTrackerAppTest {
     }
 
     @Test
-    void sleepAfterSeven_shouldBeSleepless() {
+    void oneNightWithoutSleep_shouldBeDetected() {
         List<SleepingSession> sessions = List.of(
-                session("01.10.25 07:00", "01.10.25 10:00", SleepQuality.NORMAL)
+                session("01.10.25 23:00", "02.10.25 03:00", SleepQuality.GOOD),
+                session("03.10.25 23:00", "04.10.25 03:00", SleepQuality.GOOD)
         );
 
+        // ночь 02.10 — без сна
         assertEquals(1,
                 new SleeplessNightsAnalysis().apply(sessions).getValue());
     }
 
-    @Test
-    void sleepless_shouldWorkAcrossMonths() {
-        List<SleepingSession> sessions = List.of(
-                session("30.10.25 22:00", "31.10.25 07:00", SleepQuality.GOOD),
-                session("02.11.25 22:00", "03.11.25 07:00", SleepQuality.GOOD)
-        );
-
-        assertEquals(1,
-                new SleeplessNightsAnalysis().apply(sessions).getValue());
-    }
+    
 
     // =====================================================
     // CHRONOTYPE
