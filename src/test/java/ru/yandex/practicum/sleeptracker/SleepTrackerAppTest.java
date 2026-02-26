@@ -13,9 +13,7 @@ public class SleepTrackerAppTest {
     private static final DateTimeFormatter FORMATTER =
             DateTimeFormatter.ofPattern("dd.MM.yy HH:mm");
 
-    // =====================================================
     // ВСПОМОГАТЕЛЬНЫЙ МЕТОД
-    // =====================================================
 
     private SleepingSession session(String start,
                                     String end,
@@ -28,9 +26,7 @@ public class SleepTrackerAppTest {
         );
     }
 
-    // =====================================================
     // TOTAL SESSIONS
-    // =====================================================
 
     @Test
     void totalSessions_shouldReturnCorrectCount() {
@@ -49,9 +45,7 @@ public class SleepTrackerAppTest {
                 new TotalSessionsAnalysis().apply(List.of()).getValue());
     }
 
-    // =====================================================
     // MIN DURATION
-    // =====================================================
 
     @Test
     void minDuration_shouldFindMinimum() {
@@ -70,9 +64,7 @@ public class SleepTrackerAppTest {
                 new MinDurationAnalysis().apply(List.of()).getValue());
     }
 
-    // =====================================================
     // MAX DURATION
-    // =====================================================
 
     @Test
     void maxDuration_shouldFindMaximum() {
@@ -91,9 +83,7 @@ public class SleepTrackerAppTest {
                 new MaxDurationAnalysis().apply(List.of()).getValue());
     }
 
-    // =====================================================
     // AVG DURATION
-    // =====================================================
 
     @Test
     void avgDuration_shouldCalculateCorrectly() {
@@ -112,9 +102,7 @@ public class SleepTrackerAppTest {
                 new AvgDurationAnalysis().apply(List.of()).getValue());
     }
 
-    // =====================================================
     // BAD QUALITY
-    // =====================================================
 
     @Test
     void badQuality_shouldCountCorrectly() {
@@ -138,9 +126,7 @@ public class SleepTrackerAppTest {
                 new BadQualityCountAnalysis().apply(sessions).getValue());
     }
 
-    // =====================================================
-// SLEEPLESS NIGHTS
-// =====================================================
+    // SLEEPLESS NIGHTS
 
     @Test
     void sleepFrom23To3_shouldNotBeSleepless() {
@@ -176,9 +162,7 @@ public class SleepTrackerAppTest {
 
 
 
-    // =====================================================
     // CHRONOTYPE
-    // =====================================================
 
     @Test
     void chronotype_shouldDetectOwl() {

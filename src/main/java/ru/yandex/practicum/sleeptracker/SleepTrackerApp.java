@@ -13,7 +13,7 @@ public class SleepTrackerApp {
     private static final DateTimeFormatter FORMATTER =
             DateTimeFormatter.ofPattern("dd.MM.yy HH:mm");
 
-    // 🔹 Укажи здесь путь к файлу
+
     private static final String FILE_PATH = "src/main/resources/sleep_log.txt";
 
     private final List<SleepAnalysis> analyses = List.of(
