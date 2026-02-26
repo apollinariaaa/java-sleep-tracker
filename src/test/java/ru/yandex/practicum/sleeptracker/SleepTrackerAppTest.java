@@ -174,7 +174,7 @@ public class SleepTrackerAppTest {
                 new SleeplessNightsAnalysis().apply(sessions).getValue());
     }
 
-    
+
 
     // =====================================================
     // CHRONOTYPE
