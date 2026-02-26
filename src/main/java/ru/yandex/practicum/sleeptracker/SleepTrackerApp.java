@@ -13,9 +13,6 @@ public class SleepTrackerApp {
     private static final DateTimeFormatter FORMATTER =
             DateTimeFormatter.ofPattern("dd.MM.yy HH:mm");
 
-
-    private static final String FILE_PATH = "src/main/resources/sleep_log.txt";
-
     private final List<SleepAnalysis> analyses = List.of(
             new TotalSessionsAnalysis(),
             new MinDurationAnalysis(),
@@ -28,7 +25,17 @@ public class SleepTrackerApp {
 
     public static void main(String[] args) throws IOException {
 
-        List<SleepingSession> sessions = Files.lines(Path.of(FILE_PATH))
+        
+        if (args.length == 0) {
+            System.out.println("Ошибка: необходимо передать путь к файлу в аргументах командной строки.");
+            System.out.println("Пример запуска:");
+            System.out.println("java SleepTrackerApp src/main/resources/sleep_log.txt");
+            return;
+        }
+
+        String filePath = args[0];
+
+        List<SleepingSession> sessions = Files.lines(Path.of(filePath))
                 .filter(line -> !line.isBlank())
                 .map(SleepTrackerApp::parseLine)
                 .collect(Collectors.toList());
