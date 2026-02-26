@@ -24,7 +24,6 @@ public class SleepTrackerApp {
     );
 
     public static void main(String[] args) throws IOException {
-
         
         if (args.length == 0) {
             System.out.println("Ошибка: необходимо передать путь к файлу в аргументах командной строки.");
